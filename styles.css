@@ -1,0 +1,93 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 1em;
+    font-family: "Segoe UI", "Arial", sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: #F4F7FA; /* Lighter, clean background */
+}
+
+h1 {
+    color: #1F4E79; /* Darker blue for better contrast */
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 0 rgba(227, 239, 255, 0.6); /* Softer shadow for depth */
+}
+
+h4 {
+    color: #333;
+    margin-bottom: 0.5em;
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 12px; /* Increased padding for better touch targets */
+    margin-top: 8px;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Slightly more rounded corners */
+    background: #FFFFFF; /* White background */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Slightly deeper shadow for focus */
+    transition: all 0.3s ease; /* Smooth transitions for interactions */
+}
+
+input:focus,
+select:focus,
+button:focus {
+    outline: none;
+    border-color: #1F4E79; /* Darker blue for better focus visibility */
+    box-shadow: 0 0 8px rgba(31, 78, 121, 0.2); /* Subtle glow on focus */
+}
+
+button {
+    background-color: #5A9BD5; /* Softer button color */
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+button:hover {
+    background-color: #1F4E79; /* Darker on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.container {
+    max-width: 900px; /* Increased width for more content space */
+    margin: 20px auto;
+    background-color: #FFFFFF; /* Clean white background */
+    padding: 30px; /* Increased padding for more whitespace */
+    border-radius: 10px; /* More rounded corners for modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Deeper shadow for more depth */
+    border: 1px solid #ddd; /* Lighter border */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Increased spacing between form groups */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px; /* More spacing for labels */
+    font-weight: 600; /* Bold labels for better readability */
+    color: #555; /* Softer color for labels */
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    input,
+    select,
+    button {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}
