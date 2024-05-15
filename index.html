@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBP OP MIS Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" id="loginForm">
+        <h4>Login</h4>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <button type="button" onclick="validateCredentials()">Validate</button>
+    </div>
+    <div class="container" style="display: none;" id="mainContent">
+        <h1>HBP OP MIS Application</h1>
+        <div class="container">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+        <label for="siteId">Site ID:</label>
+<select id="siteId" name="siteId" onchange="fetchSiteInfo()" required>
+    <option value="" disabled selected>Select Site ID</option>
+</select>
+<label for="siteName">Site Name:</label>
+      <input type="text" id="siteName" name="siteName" readonly required>
+</div>
+    <div class="container">
+        <h4>OPD Walkins</h4>
+        <div class="form-group">
+            <label for="newPatients">Number of New Patients:</label>
+            <input type="number" id="newPatients" name="newPatients">
+        </div>
+        <div class="form-group">
+            <label for="reviewPatients">Number of Review Patients:</label>
+            <input type="number" id="reviewPatients" name="reviewPatients">
+        </div>
+        <div class="form-group">
+            <label for="totalPatients">Total Patients:</label>
+            <input type="number" id="totalPatients" name="totalPatients" readonly>
+    </div>
+        <h4>Gross Sales</h4>
+        <div class="container">
+            <label for="cashSales">Cash Sales:</label>
+            <input type="number" id="cashSales" name="cashSales">
+        </div>
+        <div class="form-group">
+            <label for="creditSales">Credit Sales:</label>
+            <input type="number" id="creditSales" name="creditSales">
+        </div>
+        <div class="form-group">
+            <label for="cardSales">Card Sales:</label>
+            <input type="number" id="cardSales" name="cardSales">
+        </div>
+        <div class="form-group">
+            <label for="actualSales">Total Sales:</label>
+            <input type="number"  id="Totalsales" name="actualSales" readonly>
+        </div>
+
+        <h4>Discount</h4>
+        <div class="container">
+            <label for="cashdiscount">Cash Discount :</label>
+            <input type="number" id="cashDiscount" name="cashdiscount">
+        </div>
+        <div class="form-group">
+            <label for="Creditdiscount">Credit Discount :</label>
+            <input type="number" id="creditDiscount" name="creditDiscount">
+        </div>
+        <div class="form-group">
+            <label for="totaldiscount">Total Discount :</label>
+            <input type="number" id="totalDiscount" name="totalDiscount" readonly>
+        </div>
+        <h4>Categorywise Sales</h4>
+        <div class="container">
+            <label for="Pharma">Pharma Sale :</label>
+            <input type="number" id="psale" name="pharmasale">
+        </div>
+        <div class="form-group">
+            <label for="FMCG">FMCG Sale :</label>
+            <input type="number" id="fsale" name="fmcgsale">
+        </div>
+        <div class="form-group">
+            <label for="PL">Private Label Sale :</label>
+            <input type="number" id="plsale" name="plsale">
+        </div>
+        <div class="form-group">
+            <label for="Surgical">Surgical Sale :</label>
+            <input type="number" id="ssale" name="ssale">
+        </div>
+        <div class="form-group">
+            <label for="H&B">HNB Sale :</label>
+            <input type="number" id="Hsale" name="HSale">
+        </div>
+        <div class="form-group">
+            <label for="Grandtot">Grand Total :</label>
+            <input type="number" id="grtot" name="grtot" readonly>
+        </div>
+        <h4>Focused Sales</h4>
+        <div class="container">
+            <label for="Vaccine">Vaccine Sale :</label>
+            <input type="number" id="Vsale" name="vsale">
+        </div>
+        <div class="form-group">
+            <label for="Erythropoitine">Erythropoitine Sale :</label>
+            <input type="number" id="ERTsale" name="ERTsale">
+        </div>
+        <div class="form-group">
+            <label for="IVF">IVF Sale :</label>
+            <input type="number" id="IVFsale" name="ivfsale">
+        </div>
+        <div class="form-group">
+            <label for="FGrandtot">Grand Total :</label>
+            <input type="number" id="Fgrtot" name="Fgrtot" readonly>
+        </div>
+        <h4>PDPC Sales (Post Discharge Patient's Care)</h4>
+<div class="form-group">
+    <label for="pdpcDischarge">Number of Discharge (Except DAMA, Expired, Neonatal):</label>
+    <input type="number" id="pdpcDischarge" name="pdpcDischarge">
+</div>
+<div class="form-group">
+    <label for="pdpcSalesValue">PDPC Sales Value:</label>
+    <input type="number" id="pdpcSalesValue" name="pdpcSalesValue">
+</div>
+<div class="form-group">
+    <label for="pdpcSalesContribution">Sales Contribution %:</label>
+    <input type="number" id="pdpcSalesContribution" name="pdpcSalesContribution" readonly>
+</div>
+
+<h4>Chronic Sales (Illness/disease persisting for a long time or constantly recurring)</h4>
+<div class="form-group">
+    <label for="chronicSalesValue">Chronic Sales Value:</label>
+    <input type="number" id="chronicSalesValue" name="chronicSalesValue">
+</div>
+<div class="form-group">
+    <label for="chronicSalesContribution">Sales Contribution:</label>
+    <input type="number" id="chronicSalesContribution" name="chronicSalesContribution" readonly>
+</div>
+<h4>Help Desk Service (Sales generated by Help Desk Incharge)</h4>
+<div class="form-group">
+    <label for="flotters">Number of Flotters:</label>
+    <input type="number" id="flotters" name="flotters">
+</div>
+<div class="form-group">
+    <label for="mposCount">M-POS Count:</label>
+    <input type="number" id="mposCount" name="mposCount">
+</div>
+<div class="form-group">
+    <label for="mposSales">M-POS Sales:</label>
+    <input type="number" id="mposSales" name="mposSales">
+</div>
+<div class="form-group">
+    <label for="helpCounterSales">Help Counter Sales:</label>
+    <input type="number" id="helpCounterSales" name="helpCounterSales">
+</div>
+<div class="form-group">
+    <label for="helpTotalSales">Total Sales:</label>
+    <input type="number" id="helpTotalSales" name="helpTotalSales" readonly>
+</div>
+<div class="form-group">
+    <label for="helpSalesContribution">Sales Contribution %:</label>
+    <input type="number" id="helpSalesContribution" name="helpSalesContribution" readonly>
+</div>
+
+<h4>Medication Counselling Counter</h4>
+<div class="form-group">
+    <label for="counterCount">Counter Count:</label>
+    <input type="number" id="counterCount" name="counterCount">
+</div>
+<div class="form-group">
+    <label for="counterAddOnSales">Counter Add-on Sales:</label>
+    <input type="number" id="counterAddOnSales" name="counterAddOnSales">
+</div>
+<h4>Door Deliveries</h4>
+<div class="form-group">
+    <label for="doorDeliveries">Number of Door Deliveries:</label>
+    <input type="number" id="doorDeliveries" name="doorDeliveries">
+</div>
+<div class="form-group">
+    <label for="deliverySalesValue">Delivery Sales Value:</label>
+    <input type="number" id="deliverySalesValue" name="deliverySalesValue">
+</div>
+<div class="form-group">
+    <label for="deliverySalesContribution">Sales Contribution:</label>
+    <input type="number" id="deliverySalesContribution" name="deliverySalesContribution" readonly>
+</div>
+
+<h4>TOKEN VALUE (Honour prescription Vs sales value)</h4>
+<div class="form-group">
+    <label for="totalPrescriptions">Total No. of Prescription Received for the month:</label>
+    <input type="number" id="totalPrescriptions" name="totalPrescriptions">
+</div>
+<div class="form-group">
+    <label for="avgBillValue">Avg Bill Value:</label>
+    <input type="number" id="avgBillValue" name="avgBillValue" readonly>
+</div>
+<h4>Pharma Free Goods</h4>
+<div class="form-group">
+    <label for="freeGoodsTransferValue">Free Goods Transfer Value (From Corporate Store):</label>
+    <input type="number" id="freeGoodsTransferValue" name="freeGoodsTransferValue">
+</div>
+<div class="form-group">
+    <label for="prevMonthBalance">Previous Month Balance (Free Goods):</label>
+    <input type="number" id="prevMonthBalance" name="prevMonthBalance">
+</div>
+<div class="form-group">
+    <label for="freeGoodsSalesValue">Free Goods Sales Value:</label>
+    <input type="number" id="freeGoodsSalesValue" name="freeGoodsSalesValue">
+</div>
+<div class="form-group">
+    <label for="liquidatePercentage">Liquidate %:</label>
+    <input type="number" id="liquidatePercentage" name="liquidatePercentage">
+</div>
+
+<h4>Closing Stock</h4>
+<div class="form-group">
+    <label for="closingStockValue">Closing Stock Value:</label>
+    <input type="number" id="closingStockValue" name="closingStockValue">
+</div>
+<div class="form-group">
+    <label for="cogsValue">COGS Value:</label>
+    <input type="number" id="cogsValue" name="cogsValue" readonly>
+</div>
+<div class="form-group">
+    <label for="stockHoldingDays">Number of Stock Holding Days:</label>
+    <input type="number" id="stockHoldingDays" name="stockHoldingDays" readonly>
+</div>
+
+<h4>Non Moving Stock Value</h4>
+<div class="form-group">
+    <label for="transferringQuantity">Transferring Quantity:</label>
+    <input type="number" id="transferringQuantity" name="transferringQuantity">
+</div>
+<div class="form-group">
+    <label for="transferringValue">Transferring Value:</label>
+    <input type="number" id="transferringValue" name="transferringValue">
+</div>
+
+<h4>E-Prescription</h4>
+<div class="form-group">
+    <label for="numEPrescriptions">Number of E-Prescriptions:</label>
+    <input type="number" id="numEPrescriptions" name="numEPrescriptions">
+</div>
+<div class="form-group">
+    <label for="ePrescriptionToInvoice">E-Prescription Converted to Invoice:</label>
+    <input type="number" id="ePrescriptionToInvoice" name="ePrescriptionToInvoice">
+</div>
+<div class="form-group">
+    <label for="ePrescriptionPercentage">Number of E-Prescription %:</label>
+    <input type="number" id="ePrescriptionPercentage" name="ePrescriptionPercentage">
+</div>
+<h4>Doctor Wise Sales</h4>
+<div class="container" id="doctorSales">
+    <!-- Doctor sales inputs will be dynamically added here -->
+</div>
+<button type="button" onclick="addDoctor()">Add Doctor</button>
+<h4>MANPOWER</h4>
+<div class="container">
+    <label for="manpowerBudget">Budget:</label>
+    <input type="number" id="manpowerBudget" name="manpowerBudget">
+</div>
+<div class="form-group">
+    <label for="manpowerActualsCount">Actuals Count:</label>
+    <input type="number" id="manpowerActualsCount" name="manpowerActualsCount">
+</div>
+<div class="form-group">
+    <label for="manpowerVariance">Variance:</label>
+    <input type="number" id="manpowerVariance" name="manpowerVariance" readonly>
+</div>
+<div class="form-group">
+    <label for="manpowerRevenuePerHead">Revenue / Head:</label>
+    <input type="number" id="manpowerRevenuePerHead" name="manpowerRevenuePerHead" readonly>
+</div>
+<h1>Designation wise Count Entry</h1>
+    <div id="designationContainer"></div>
+    <button onclick="addDesignation()">Add Designation</button>
+
+    </div>
+    <div class="container">
+        <h4>EXPENSES (Data to be taken from Rough Cash Book)</h4>
+        <div class="form-group">
+            <label for="refreshmentExpenses">Refreshment:</label>
+            <input type="number" id="refreshmentExpenses" name="refreshmentExpenses" class="expense-input">
+        </div>
+        <div class="form-group">
+            <label for="conveyanceExpenses">Conveyance Expenses:</label>
+            <input type="number" id="conveyanceExpenses" name="conveyanceExpenses" class="expense-input">
+        </div>
+        <div class="form-group">
+            <label for="travellingExpenses">Travelling Expenses:</label>
+            <input type="number" id="travellingExpenses" name="travellingExpenses" class="expense-input">
+        </div>
+        <div class="form-group">
+            <label for="freightCharges">Freight Charges:</label>
+            <input type="number" id="freightCharges" name="freightCharges" class="expense-input">
+        </div>
+        <div class="form-group">
+            <label for="repairsMaintenance">Repairs & Maintenance:</label>
+            <input type="number" id="repairsMaintenance" name="repairsMaintenance" class="expense-input">
+        </div>
+        <div class="form-group">
+            <label for="auditorExpenses">Auditor Expenses:</label>
+            <input type="number" id="auditorExpenses" name="auditorExpenses" class="expense-input">
+        </div>
+        <div class="form-group">
+            <label for="otherExpenses">Other Expenses:</label>
+            <input type="number" id="otherExpenses" name="otherExpenses" class="expense-input">
+        </div>
+        <div class="form-group">
+            <label for="totalExpenses">Total Expenses:</label>
+            <input type="number" id="totalExpenses" name="totalExpenses" readonly>
+        </div>
+        <div class="form-group">
+            <label for="expensesPercentage">Expenses %:</label>
+            <input type="number" id="expensesPercentage" name="expensesPercentage" readonly>
+        </div>
+    </div>
+    <div class="container">
+    <h4>Inventory Adjustment Receipt</h4>
+<div class="form-group">
+    <label for="adjustmentReceipt">Adjustment Receipt:</label>
+    <input type="number" id="adjustmentReceipt" name="adjustmentReceipt">
+</div>
+
+<h4>Inventory Adjustment Issue</h4>
+<div class="form-group">
+    <label for="adjustmentIssue">Adjustment Issue:</label>
+    <input type="number" id="adjustmentIssue" name="adjustmentIssue">
+</div>
+
+<h4>Pharma Purchases</h4>
+<div class="form-group">
+    <label for="authorizedVendor">Authorized Vendor:</label>
+    <input type="number" id="authorizedVendor" name="authorizedVendor">
+</div>
+<div class="form-group">
+    <label for="outsidePurchase">Outside Purchase:</label>
+    <input type="number" id="outsidePurchase" name="outsidePurchase">
+</div>
+<h4>Customer's Feedback</h4>
+<div class="form-group">
+    <label for="excellentCustomer">Excellent:</label>
+    <input type="number" id="excellentCustomer" name="excellentCustomer">
+</div>
+<div class="form-group">
+    <label for="goodCustomer">Good:</label>
+    <input type="number" id="goodCustomer" name="goodCustomer">
+</div>
+<div class="form-group">
+    <label for="averageCustomer">Average:</label>
+    <input type="number" id="averageCustomer" name="averageCustomer">
+</div>
+<div class="form-group">
+    <label for="poorCustomer">Poor:</label>
+    <input type="number" id="poorCustomer" name="poorCustomer">
+</div>
+<div class="form-group">
+    <label for="totalCustomers">Total:</label>
+    <input type="number" id="totalCustomers" name="totalCustomers" readonly>
+</div>
+<div class="form-group">
+    <label for="customerFeedbackPercentage">Feedback %:</label>
+    <input type="number" id="customerFeedbackPercentage" name="customerFeedbackPercentage" readonly>
+</div>
+
+<h4>Doctor's Feedback</h4>
+<div class="form-group">
+    <label for="excellentDoctor">Excellent:</label>
+    <input type="number" id="excellentDoctor" name="excellentDoctor">
+</div>
+<div class="form-group">
+    <label for="goodDoctor">Good:</label>
+    <input type="number" id="goodDoctor" name="goodDoctor">
+</div>
+<div class="form-group">
+    <label for="averageDoctor">Average:</label>
+    <input type="number" id="averageDoctor" name="averageDoctor">
+</div>
+<div class="form-group">
+    <label for="poorDoctor">Poor:</label>
+    <input type="number" id="poorDoctor" name="poorDoctor">
+</div>
+<div class="form-group">
+    <label for="totalDoctors">Total:</label>
+    <input type="number" id="totalDoctors" name="totalDoctors" readonly>
+</div>
+<div class="form-group">
+    <label for="doctorFeedbackPercentage">Feedback %:</label>
+    <input type="number" id="doctorFeedbackPercentage" name="doctorFeedbackPercentage" readonly>
+</div>
+<div class="form-group">
+    <label for="totalDoctorVisits">The total number of doctors who came for the month:</label>
+    <input type="number" id="totalDoctorVisits" name="totalDoctorVisits">
+</div>
+</div>
+<div class="container">
+    <h4>GENERIC SALES (Products with 50% and above margins)</h4>
+    <div class="form-group">
+        <label for="genericActuals">Actuals:</label>
+        <input type="number" id="genericActuals" name="genericActuals">
+    </div>
+    <div class="form-group">
+        <label for="genericAchieved">Achieved %:</label>
+        <input type="number" id="genericAchieved" name="genericAchieved" readonly>
+    </div>
+    <div class="form-group">
+        <label for="genericSalesRatio">Sales Ratio%:</label>
+        <input type="number" id="genericSalesRatio" name="genericSalesRatio" readonly>
+    </div>
+    <div class="form-group">
+        <label for="ausAbbotSales">AUS & Abbott Pharma Sales:</label>
+        <input type="number" id="ausAbbotSales" name="ausAbbotSales">
+    </div>
+    <div class="form-group">
+        <label for="ausAbbotRatio">AUS & Abbott Pharma Ratio%:</label>
+        <input type="number" id="ausAbbotRatio" name="ausAbbotRatio" readonly>
+    </div>
+</div>
+<button type="button" id="submitButton">Submit</button>
+<script src="script.js"></script>
+</body>
+<datalist id="designationList">
+    
+    <option value="Asst manager / Sr. Executive / Executive / Jr. Exective"></option>
+    <option value="Sr. Supervisor/ Supervisor / Jr. Supervisor"></option>
+    <option value="Sr. Ward Pharmacist / Ward Pharmacist"></option>
+    <option value="Sr. Pharmacist / Pharmacist / Tr.Pharmacist"></option>
+    <option value="Sr. Clinical Pharmacist / Clinical Pharmacist"></option>
+    <option value="Sr. Pharmacist Aide /Pharmacist Aide/ Jr.Pharmacist Aide"></option>
+    <option value="Sr. Assistant / Assistant"></option>
+    <option value="Sr. DEO / DEO / Jr. DEO"></option>
+    <option value="Sr. Cashier / Cashier"></option>
+    <option value="Cashier Cum DEO"></option>
+    <option value="G.R.O"></option>
+    <option value="PRO /Product Advisor"></option>
+    <option value="Pharmacy Assistant/ Pharmacy Trainee / Helper"></option>
+    <option value="Contract Employees"></option>
+    <option value="No. New Joinees "></option>
+    <option value="Resign"></option>
+
+    
+</datalist>
+</html>
